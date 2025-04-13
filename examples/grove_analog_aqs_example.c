@@ -1,5 +1,5 @@
 /**
- * @file app_main.c
+ * @file grove_analog_aqs_example.c
  * @brief Example application for Grove Analog Air Quality Sensor component
  */
 

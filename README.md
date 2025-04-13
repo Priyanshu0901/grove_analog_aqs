@@ -39,8 +39,8 @@ git clone https://github.com/Priyanshu0901/grove_analog_aqs.git
 
 The component can be configured through menuconfig. Navigate to "Component config → Grove Analog Air Quality Sensor Configuration" to configure:
 
-* ADC IO pin number and ADC unit number
-* ADC channel and attenuation settings
+* ADC unit number and channel
+* ADC attenuation settings
 * Reference voltage
 * Air quality thresholds
 * Power management options
@@ -89,10 +89,9 @@ void app_main(void)
 {
     // Custom configuration
     grove_aqs_config_t config = {
-        .adc_io_num = 4,              // Use GPIO4 for ADC input
         .adc_unit_num = 0,            // Use ADC_UNIT_1 (0 for ADC_UNIT_1, 1 for ADC_UNIT_2)
         .adc_channel = ADC1_CHANNEL_7,
-        .adc_atten = ADC_ATTEN_DB_11,
+        .adc_atten = ADC_ATTEN_DB_12,
         .vref = 3300,
         .fresh_threshold = 800,
         .good_threshold = 1200,
@@ -166,9 +165,8 @@ typedef enum {
 } grove_aqs_quality_t;
 
 typedef struct {
-    int adc_io_num;                   // ADC IO pin number connected to the sensor
     int adc_unit_num;                 // ADC unit number (0 for ADC_UNIT_1, 1 for ADC_UNIT_2)
-    adc1_channel_t adc_channel;
+    adc_channel_t adc_channel;
     adc_atten_t adc_atten;
     int vref;
     int fresh_threshold;

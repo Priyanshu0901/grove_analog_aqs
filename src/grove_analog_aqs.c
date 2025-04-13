@@ -47,8 +47,8 @@ esp_err_t grove_aqs_init(const grove_aqs_config_t *config) {
     sensor.adc_unit = sensor.config.adc_unit_num == 0 ? ADC_UNIT_1 : ADC_UNIT_2;
     
     // Log the configuration
-    ESP_LOGI(TAG, "Initializing with ADC IO: %d, ADC Unit: %d, ADC Channel: %d",
-             sensor.config.adc_io_num, sensor.config.adc_unit_num, sensor.config.adc_channel);
+    ESP_LOGI(TAG, "Initializing with ADC Unit: %d, ADC Channel: %d",
+             sensor.config.adc_unit_num, sensor.config.adc_channel);
     
     // Initialize GPIO for power control if needed
     if (sensor.config.use_gpio_power && sensor.config.power_gpio != GPIO_NUM_NC) {

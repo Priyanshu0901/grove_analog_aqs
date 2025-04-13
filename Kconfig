@@ -1,11 +1,5 @@
 menu "Grove Analog Air Quality Sensor Configuration"
 
-    config GROVE_AQS_ADC_IO_NUM
-        int "ADC IO Number"
-        default 2
-        help
-            Set the IO number/pin for the air quality sensor.
-
     config GROVE_AQS_ADC_UNIT_NUM
         int "ADC Unit Number [0-1]"
         default 0
@@ -18,7 +12,9 @@ menu "Grove Analog Air Quality Sensor Configuration"
         default 6
         range 0 9
         help
-            Default ADC1 channel connected to the sensor output.
+            Default ADC channel connected to the sensor output.
+            The ADC channel determines which GPIO pin is used.
+            Refer to ESP32 documentation for the mapping between ADC channels and GPIO pins.
             
     config GROVE_AQS_DEFAULT_ADC_ATTEN
         int "Default ADC Attenuation"
@@ -29,7 +25,7 @@ menu "Grove Analog Air Quality Sensor Configuration"
             0: ADC_ATTEN_DB_0   (No attenuation, 1.1V full-scale)
             1: ADC_ATTEN_DB_2_5 (2.5dB attenuation, 1.5V full-scale)
             2: ADC_ATTEN_DB_6   (6dB attenuation, 2.2V full-scale)
-            3: ADC_ATTEN_DB_11  (11dB attenuation, 3.3V full-scale)
+            3: ADC_ATTEN_DB_12  (12dB attenuation, 3.3V full-scale)
             
     config GROVE_AQS_DEFAULT_VREF
         int "Default Reference Voltage (mV)"

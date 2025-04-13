@@ -21,6 +21,11 @@
 extern "C" {
 #endif
 
+// Helper macro to convert GROVE_AQS_DEFAULT_ADC_ATTEN integer to enum
+#define GROVE_AQS_ADC_ATTEN(x) ((x) == 0 ? ADC_ATTEN_DB_0 : \
+                               ((x) == 1 ? ADC_ATTEN_DB_2_5 : \
+                               ((x) == 2 ? ADC_ATTEN_DB_6 : ADC_ATTEN_DB_12)))
+
 /**
  * @brief Air quality levels
  */
@@ -36,7 +41,6 @@ typedef enum {
  * @brief Configuration for the Grove Analog Air Quality Sensor
  */
 typedef struct {
-    int adc_io_num;                  /*!< ADC IO pin number connected to the sensor */
     int adc_unit_num;                /*!< ADC unit number (0 for ADC_UNIT_1, 1 for ADC_UNIT_2) */
     adc_channel_t adc_channel;       /*!< ADC channel connected to the sensor output */
     adc_atten_t adc_atten;           /*!< ADC attenuation for the input */
@@ -65,17 +69,16 @@ typedef struct {
  * @brief Default configuration for the Grove Analog Air Quality Sensor
  */
 #define GROVE_AQS_DEFAULT_CONFIG() { \
-    .adc_io_num = CONFIG_GROVE_AQS_ADC_IO_NUM, \
     .adc_unit_num = CONFIG_GROVE_AQS_ADC_UNIT_NUM, \
-    .adc_channel = CONFIG_GROVE_AQS_ADC_CHANNEL, \
-    .adc_atten = ADC_ATTEN_DB_11, \
-    .vref = 3300, \
-    .fresh_threshold = 700, \
-    .good_threshold = 1000, \
-    .moderate_threshold = 1500, \
-    .poor_threshold = 2000, \
-    .use_gpio_power = false, \
-    .power_gpio = GPIO_NUM_NC \
+    .adc_channel = CONFIG_GROVE_AQS_DEFAULT_ADC_CHANNEL, \
+    .adc_atten = GROVE_AQS_ADC_ATTEN(CONFIG_GROVE_AQS_DEFAULT_ADC_ATTEN), \
+    .vref = CONFIG_GROVE_AQS_DEFAULT_VREF, \
+    .fresh_threshold = CONFIG_GROVE_AQS_FRESH_THRESHOLD, \
+    .good_threshold = CONFIG_GROVE_AQS_GOOD_THRESHOLD, \
+    .moderate_threshold = CONFIG_GROVE_AQS_MODERATE_THRESHOLD, \
+    .poor_threshold = CONFIG_GROVE_AQS_POOR_THRESHOLD, \
+    .use_gpio_power = CONFIG_GROVE_AQS_USE_GPIO_POWER, \
+    .power_gpio = CONFIG_GROVE_AQS_POWER_GPIO == -1 ? GPIO_NUM_NC : CONFIG_GROVE_AQS_POWER_GPIO \
 }
 
 /**
