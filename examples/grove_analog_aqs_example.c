@@ -34,11 +34,11 @@ void app_main(void)
     }
 
     ESP_LOGI(TAG, "Waiting for sensor to stabilize...");
-    vTaskDelay(pdMS_TO_TICKS(3000)); // Give the sensor some time to stabilize
+    vTaskDelay(pdMS_TO_TICKS(5000)); // Give the sensor some time to stabilize
 
     // Read and display sensor data in a loop
     int readings_count = 0;
-    const int MAX_READINGS = 30; // Take 30 readings and then stop
+    const int MAX_READINGS = 50; // Take 30 readings and then stop
     
     while (readings_count < MAX_READINGS) {
         grove_aqs_data_t data;
