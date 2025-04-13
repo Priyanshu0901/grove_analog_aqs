@@ -17,7 +17,6 @@ void app_main(void)
     grove_aqs_config_t config = GROVE_AQS_DEFAULT_CONFIG();
     
     // Optionally customize configuration
-    // config.adc_io_num = 4;             // Use GPIO4 for ADC
     // config.adc_unit_num = 1;           // Use ADC_UNIT_2
     // config.adc_channel = ADC1_CHANNEL_7;
     // config.fresh_threshold = 800;
@@ -25,8 +24,8 @@ void app_main(void)
     // config.power_gpio = GPIO_NUM_5;
     
     ESP_LOGI(TAG, "Initializing Grove Analog Air Quality Sensor");
-    ESP_LOGI(TAG, "Using ADC IO: %d, ADC Unit: %d, ADC Channel: %d", 
-             config.adc_io_num, config.adc_unit_num, config.adc_channel);
+    ESP_LOGI(TAG, "Using ADC Unit: %d, ADC Channel: %d", 
+             config.adc_unit_num, config.adc_channel);
              
     esp_err_t ret = grove_aqs_init(&config);
     if (ret != ESP_OK) {
