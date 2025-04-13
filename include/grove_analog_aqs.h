@@ -13,7 +13,8 @@
 #define GROVE_ANALOG_AQS_H
 
 #include "esp_err.h"
-#include "driver/adc.h"
+#include "esp_adc/adc_oneshot.h"
+#include "esp_adc/adc_cali.h"
 #include "driver/gpio.h"
 
 #ifdef __cplusplus
@@ -37,7 +38,7 @@ typedef enum {
 typedef struct {
     int adc_io_num;                  /*!< ADC IO pin number connected to the sensor */
     int adc_unit_num;                /*!< ADC unit number (0 for ADC_UNIT_1, 1 for ADC_UNIT_2) */
-    adc1_channel_t adc_channel;      /*!< ADC channel connected to the sensor output */
+    adc_channel_t adc_channel;       /*!< ADC channel connected to the sensor output */
     adc_atten_t adc_atten;           /*!< ADC attenuation for the input */
     int vref;                        /*!< Reference voltage in mV (typically 3300 for 3.3V) */
     
@@ -66,15 +67,15 @@ typedef struct {
 #define GROVE_AQS_DEFAULT_CONFIG() { \
     .adc_io_num = CONFIG_GROVE_AQS_ADC_IO_NUM, \
     .adc_unit_num = CONFIG_GROVE_AQS_ADC_UNIT_NUM, \
-    .adc_channel = ADC1_CHANNEL_6,   \
-    .adc_atten = ADC_ATTEN_DB_11,    \
-    .vref = 3300,                    \
-    .fresh_threshold = 700,          \
-    .good_threshold = 1000,          \
-    .moderate_threshold = 1500,      \
-    .poor_threshold = 2000,          \
-    .use_gpio_power = false,         \
-    .power_gpio = GPIO_NUM_NC        \
+    .adc_channel = CONFIG_GROVE_AQS_ADC_CHANNEL, \
+    .adc_atten = ADC_ATTEN_DB_11, \
+    .vref = 3300, \
+    .fresh_threshold = 700, \
+    .good_threshold = 1000, \
+    .moderate_threshold = 1500, \
+    .poor_threshold = 2000, \
+    .use_gpio_power = false, \
+    .power_gpio = GPIO_NUM_NC \
 }
 
 /**

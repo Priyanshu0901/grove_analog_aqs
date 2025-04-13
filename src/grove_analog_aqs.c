@@ -96,12 +96,12 @@ esp_err_t grove_aqs_init(const grove_aqs_config_t *config) {
     }
 
     // Try to create ADC calibration handle
-    adc_cali_line_fitting_config_t cali_config = {
+    adc_cali_curve_fitting_config_t cali_config = {
         .unit_id = sensor.adc_unit,
         .atten = sensor.config.adc_atten,
         .bitwidth = ADC_BITWIDTH_DEFAULT,
     };
-    ret = adc_cali_create_scheme_line_fitting(&cali_config, &sensor.adc_cali_handle);
+    ret = adc_cali_create_scheme_curve_fitting(&cali_config, &sensor.adc_cali_handle);
     if (ret == ESP_OK) {
         sensor.do_calibration = true;
         ESP_LOGI(TAG, "ADC calibration enabled");
@@ -128,7 +128,7 @@ esp_err_t grove_aqs_deinit(void) {
 
     // Delete ADC calibration handle if it was created
     if (sensor.do_calibration) {
-        esp_err_t ret = adc_cali_delete_scheme_line_fitting(sensor.adc_cali_handle);
+        esp_err_t ret = adc_cali_delete_scheme_curve_fitting(sensor.adc_cali_handle);
         if (ret != ESP_OK) {
             ESP_LOGW(TAG, "Failed to delete ADC calibration handle: %d", ret);
         }
