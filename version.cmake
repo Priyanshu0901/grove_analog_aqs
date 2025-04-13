@@ -1,0 +1,1 @@
+set(COMPONENT_VERSION "1.0.0") 

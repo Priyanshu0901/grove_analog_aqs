@@ -1,0 +1,13 @@
+name: "Priyanshu0901/grove_analog_aqs"
+version: "1.0.0"
+description: "ESP-IDF component for Grove Analog Air Quality Sensor"
+license: "MIT"
+repository: "https://github.com/Priyanshu0901/grove_analog_aqs.git"
+dependencies:
+  idf: ">=5.0.0"
+targets:
+  - esp32
+  - esp32c2
+  - esp32c3
+  - esp32c6
+  - esp32s3

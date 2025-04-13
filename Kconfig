@@ -1,0 +1,90 @@
+menu "Grove Analog Air Quality Sensor Configuration"
+
+    config GROVE_AQS_ADC_IO_NUM
+        int "ADC IO Number"
+        default 2
+        help
+            Set the IO number/pin for the air quality sensor.
+
+    config GROVE_AQS_ADC_UNIT_NUM
+        int "ADC Unit Number [0-1]"
+        default 0
+        help
+            Set the ADC unit number for the air quality sensor. 
+            ADC_UNIT_1 = 0, ADC_UNIT_2 = 1
+
+    config GROVE_AQS_DEFAULT_ADC_CHANNEL
+        int "Default ADC Channel"
+        default 6
+        range 0 9
+        help
+            Default ADC1 channel connected to the sensor output.
+            
+    config GROVE_AQS_DEFAULT_ADC_ATTEN
+        int "Default ADC Attenuation"
+        default 3
+        range 0 3
+        help
+            Default ADC attenuation for the input.
+            0: ADC_ATTEN_DB_0   (No attenuation, 1.1V full-scale)
+            1: ADC_ATTEN_DB_2_5 (2.5dB attenuation, 1.5V full-scale)
+            2: ADC_ATTEN_DB_6   (6dB attenuation, 2.2V full-scale)
+            3: ADC_ATTEN_DB_11  (11dB attenuation, 3.3V full-scale)
+            
+    config GROVE_AQS_DEFAULT_VREF
+        int "Default Reference Voltage (mV)"
+        default 3300
+        range 1000 5000
+        help
+            Default reference voltage in mV (typically 3300 for 3.3V systems).
+            
+    config GROVE_AQS_FRESH_THRESHOLD
+        int "Fresh Air Threshold (mV)"
+        default 700
+        range 0 3300
+        help
+            Voltage threshold for fresh air classification in mV.
+            Values below this threshold are considered fresh air.
+            
+    config GROVE_AQS_GOOD_THRESHOLD
+        int "Good Air Quality Threshold (mV)"
+        default 1000
+        range 0 3300
+        help
+            Voltage threshold for good air quality classification in mV.
+            Values below this threshold (but above fresh) are considered good air.
+            
+    config GROVE_AQS_MODERATE_THRESHOLD
+        int "Moderate Air Quality Threshold (mV)"
+        default 1500
+        range 0 3300
+        help
+            Voltage threshold for moderate air quality classification in mV.
+            Values below this threshold (but above good) are considered moderate air.
+            
+    config GROVE_AQS_POOR_THRESHOLD
+        int "Poor Air Quality Threshold (mV)"
+        default 2000
+        range 0 3300
+        help
+            Voltage threshold for poor air quality classification in mV.
+            Values below this threshold (but above moderate) are considered poor air.
+            Values above this threshold are considered very poor.
+            
+    config GROVE_AQS_USE_GPIO_POWER
+        bool "Use GPIO to Control Sensor Power"
+        default n
+        help
+            Enable this option to use a GPIO pin to control the power to the sensor.
+            This can be useful for power saving.
+            
+    config GROVE_AQS_POWER_GPIO
+        depends on GROVE_AQS_USE_GPIO_POWER
+        int "Power Control GPIO Pin"
+        default -1
+        range -1 39
+        help
+            GPIO pin to control the power to the sensor.
+            Set to -1 to disable GPIO control.
+            
+endmenu 
